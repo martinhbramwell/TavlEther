@@ -1,0 +1,43 @@
+<template name="home">
+	{{#if showAddFriendDialog}}
+		{{> addFriendDialog}}
+	{{/if}}
+
+	{{#if showRemoveFriendDialog}}
+		{{> removeFriendDialog}}
+	{{/if}}
+
+	<div class="row">
+		<h1>Tavli</h1>
+		<p class="lead">Modern backgammon.</p>
+	</div>
+
+	<div class="row">
+		<h2>Hey {{currentUser.username}}, let's play a game.</h2>
+
+		<h3>Friends</h3>
+
+		<table class="table">
+			<tr>
+				<th>Username</th>
+				<th>Statistics</th>
+				<th>Current Game</th>
+			</tr>
+			{{#each friends}}
+				<tr>
+					<td>{{username}}</td>
+					<td>You've won {{statistics.wins}} and lost {{statistics.losses}}</td>
+					<td>
+					{{#if gameInProgress}}
+						<a href="#" class="js-resume-game">Resume</a> or <a href="#" class="js-forfeit-game">Forfeit</a>
+					{{else}}
+						<a href="#" class="js-start-game">Start a New Game</a>
+					{{/if}}
+					</td>
+				</tr>
+			{{/each}}
+		</table>
+		<button type="button" class="btn btn-primary js-add-friend">Add New Friend</button>
+		<button type="button" class="btn btn-info js-remove-friend">Edit Friends</button>
+	</div>
+</template>

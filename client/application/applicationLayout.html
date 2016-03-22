@@ -1,0 +1,29 @@
+<template name="applicationLayout">
+	<head>
+	  <title>Tavli</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body>
+		{{> navBar}}
+		<div class="container">
+			{{> notifications}}
+	  		{{> yield}}
+	  	</div>
+	</body>
+</template>
+
+<template name="navBar">
+	<div class="navbar navbar-default" role="navigation">
+		<div class="navbar-collapse collapse">
+			{{#if currentUser}}
+				<ul class="nav navbar-nav">
+					<li><a href="#" class="home">Home</a></li>
+				</ul>
+			{{/if}}
+			<ul class="nav navbar-nav navbar-right">
+				{{> loginButtons }}
+			</ul>
+		</div>
+	</div>
+</template>

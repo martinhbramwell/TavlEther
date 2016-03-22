@@ -1,0 +1,141 @@
+html, body, .container {
+	height:100%;
+}
+
+/* Reset some margins */
+.title {
+	margin: 0;
+}
+
+.limbo, .removed {
+	min-height: 60px;
+	border: solid #7f8c8d;
+	padding: 5px;
+}
+
+.limbo .place,
+.removed .place {
+	width: 33%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.removed {
+	margin-top: 10px;
+}
+
+.game-info {
+	margin-left: -15px;
+	padding-top: 10px;
+}
+
+.off-board-pieces {
+	margin-top: 30px;
+}
+
+.board-wrapper {
+	margin: 30px;
+	position: relative;
+}
+
+.board-wrapper::after {
+	padding-top: 80%;
+	display: block;
+	content: '';
+}
+
+.board {
+	position: absolute;
+	top: 0; bottom: 0; right: 0; left: 0;
+	overflow: hidden;
+	border: solid #7f8c8d;
+}
+
+/* The high player sees the board rotated*/
+.board-wrapper .h {
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+	transform:rotate(180deg);
+}
+
+.board-row-low .place,
+.board-row-high .place:nth-child(odd) {
+	background-color: #ecf0f1;
+}
+
+.board-row-high .place,
+.board-row-low .place:nth-child(even) {
+	background-color: #bdc3c7;
+}
+
+.board-row-low,
+.h .board-row-high .piece,
+.l .board-row-low .piece {
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+	transform:rotate(180deg);
+}
+
+.board-row {
+	height: 50%;
+}
+
+.place {
+	height: 100%;
+	padding: 0;
+	position: relative;
+}
+
+.triangle-down {
+    height: 0;
+    position: absolute;
+    padding-left: 50%;
+    padding-top: 50%;
+    overflow: hidden;
+}
+
+.triangle-down:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left:-500px;
+    margin-top:-500px;
+
+    border-left: 500px solid transparent;
+    border-right: 500px solid transparent;
+}
+
+.board-row-low .place .triangle-down:after,
+.board-row-high .place:nth-child(odd):not(.base) .triangle-down:after {
+	border-top: 500px solid #bdc3c7;
+}
+
+.board-row-high .place .triangle-down:after,
+.board-row-low .place:nth-child(even):not(.base) .triangle-down:after {
+	border-top: 500px solid #ecf0f1;
+}
+
+.piece {
+	height: 0;
+	width: 70%;
+	padding: 35% 0;
+	margin: 0 auto 2px auto;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	position: relative;
+	z-index: 1;
+	text-align: center;
+	font-size: 12px;
+	line-height: 0;
+	color: white;
+}
+
+.piece-active {
+	box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.8);
+}

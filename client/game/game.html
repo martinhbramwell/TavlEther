@@ -1,0 +1,93 @@
+<template name="game">
+	<div class="row">
+		<h2 class="title"><span class="{{colours currentUser._id}}">{{currentUser.username}}</span> vs <span class="{{colours friend._id}}">{{friend.username}}</span></h2>
+	</div>
+
+	{{#if gameStatus "finished"}}
+		<h3><span class="{{colours winner._id}}">{{winner.username}}</span> is the winner!</h3>
+		<img src="/youwon.gif">
+	{{/if}}
+
+	{{#if gameStatus "forfeited"}}
+		<h3>Game has been forfeited. <span class="{{colours winner._id}}">{{winner.username}}</span> is the winner!</h3>
+		<img src="/youwon.gif">
+	{{/if}}
+
+	{{#if gameStatus "inProgress"}}
+		<div class="row">
+			<div class="col-xs-2">
+				<div class="game-info">
+					<h3><span class="{{colours game.turn}}">{{currentPlayerUsername}} </span>turn.</h3>
+					<p>{{rolledUsername}} rolled {{roll 0}} and {{roll 1}}.</p>
+					{{#if currentUsersTurn}}
+						<button type="button" class="btn btn-primary js-done">Done</button>
+					{{/if}}
+				</div>
+			</div>
+			<div class="col-xs-8">
+				<div class="board-wrapper">
+					<div class="board {{base}}">
+						<div class="board-row board-row-high">
+							{{#each highPlaces}}
+								{{> place this}}
+							{{/each}}
+						</div>
+						<div class="board-row board-row-low">
+							{{#each lowPlaces}}
+								{{> place this}}
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="off-board-pieces">{{> offBoardPieces}}</div>
+			</div>
+		</div>
+	{{/if}}
+
+	{{#if inSetup}}
+		{{> gameSetupTemplate}}
+	{{/if}}
+</template>
+
+<template name="offBoardPieces">
+	<h4 class="off-board-title">Limbo</h4>
+	<div class="limbo">
+		<div class="place user">
+			{{> stackedPiece piecesInLimbo currentUser._id}}
+		</div>
+		<div class="place friend">
+			{{> stackedPiece piecesInLimbo friend._id}}
+		</div>
+	</div>
+	<h4 class="off-board-title">Removed</h4>
+	<div class="removed">
+		<div class="place user">
+			{{> stackedPiece piecesRemoved currentUser._id}}
+		</div>
+		<div class="place friend">
+			{{> stackedPiece piecesRemoved friend._id}}
+		</div>
+	</div>
+</template>
+
+<template name="place">
+	<div class="col-xs-1 place {{base}}" data-place={{place}}>
+		<div class="triangle-down"></div>
+		{{#each firstFive pieces}}
+			{{> piece}}
+		{{/each}}
+		{{> stackedPiece remaining pieces}}
+	</div>
+</template>
+
+<template name="piece">
+	<div class="piece background-{{pieceColour this}}"></div>
+</template>
+
+<template name="stackedPiece">
+	{{#if this.length}}
+		<div class="piece background-{{stackedPieceColour this.[0]}}">{{getCount this}}</div>
+	{{/if}}
+</template>

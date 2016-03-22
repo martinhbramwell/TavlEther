@@ -1,0 +1,49 @@
+<template name="addFriendDialog">
+	<div class="modal fade in show">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Find A Friend</h4>
+				</div>
+				<div class="modal-body">
+					<ol>
+					{{#each users}}
+						<li>
+							<span>{{username}}</span>
+							<button type="button" class="btn btn-primary add" data-dismiss="modal">Add</button>
+						</li>
+					{{/each}}
+					</ol>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary done" data-dismiss="modal">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="removeFriendDialog">
+	<div class="modal fade in show">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Edit Friends</h4>
+				</div>
+				<div class="modal-body">
+					<ol>
+					{{#each friends}}
+						<li>
+							<span>{{username}}</span>
+							<button type="button" class="btn btn-danger remove" data-dismiss="modal">Remove</button>
+						</li>
+					{{/each}}
+					</ol>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary done" data-dismiss="modal">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,53 @@
+<template name="setupColour">
+	<div class="row">
+		{{#if playerNeedsToChoose}}
+			<h3>Choose a Colour</h3>
+			<ul>
+			{{#each colours}}
+				<li><a href="#" class="js-colour {{name}}">{{colourName name ../friend._id}}</a></li>
+			{{/each}}
+			</ul>
+		{{else}}
+			<h3>Waiting for {{friend.username}} to choose a colour...</h3>
+		{{/if}}
+	</div>
+</template>
+
+<template name="setupBase">
+	<div class="row">
+		{{#if playerNeedsToChoose}}
+			<h3>Pick a base</h3>
+			<ul>
+			{{#each bases}}
+				<li><a href="#" class="js-base {{base}}">{{baseFormatter this ../friend._id}}</a></li>
+			{{/each}}
+			</ul>
+		{{else}}
+			<h3>Waiting for {{friend.username}} to choose a base...</h3>
+		{{/if}}
+	</div>
+</template>
+
+<template name="setupRoll">
+	<div class="row">
+		<h3>Roll To See Who Starts</h3>
+
+		<div>{{equalRolls}}</div>
+
+		<div>
+			<span class="{{colour currentUser._id}}">{{roll currentUser._id}} </span>vs
+			<span class="{{colour friend._id}}"> {{roll friend._id}}</span>
+		</div>
+
+		{{#if playerNeedsToRoll currentUser._id}}
+			<button type="button" class="btn btn-primary js-roll">Roll!</button>
+		{{else}}
+			{{#if playerNeedsToRoll friend._id}}
+				<div>Waiting for {{friend.username}} to roll.</div>
+			{{else}}
+				<div><span class="{{colour game.turn}}">{{username game.turn}}</span> gets the first roll!</div>
+				<button type="button" class="btn btn-primary js-start">Start Game</button>
+			{{/if}}
+		{{/if}}
+	</div>
+</template>
